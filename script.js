@@ -53,13 +53,17 @@ function addItem(countItemId, itemPriceId, itemPrice) {
 
     // taxTotal
     var readTaxTotal = document.getElementById('taxTotal').innerText
-    var taxTotal = parseFloat(readTaxTotal) + Math.floor(itemPrice * .15)
+    var taxTotal = parseFloat(readTaxTotal) + Math.round(itemPrice * .15)
     document.getElementById('taxTotal').innerText = taxTotal
 
     // mainTotal
     var readTotal = document.getElementById('total').innerText
-    var total = parseFloat(readTotal) + Math.floor(itemPrice * .15) + itemPrice
+    var total = parseFloat(readTotal) + Math.round(itemPrice * .15) + itemPrice
     document.getElementById('total').innerText = total
+    if (total < 0 || taxTotal < 0) {
+        document.getElementById('taxTotal').innerText = 0;
+        document.getElementById('total').innerText = 0;
+    }
 }
 
 
@@ -94,13 +98,17 @@ function removeItem(countItemId, itemPriceId, itemPrice) {
 
     // taxTotal
     var readTaxTotal = document.getElementById('taxTotal').innerText
-    var taxTotal = parseFloat(readTaxTotal) - Math.floor(itemPrice * .15)
+    var taxTotal = parseFloat(readTaxTotal) - Math.round(itemPrice * .15)
     document.getElementById('taxTotal').innerText = taxTotal
 
     // mainTotal
     var readTotal = document.getElementById('total').innerText
-    var total = parseFloat(readTotal) - Math.floor(itemPrice * .15) - itemPrice
+    var total = parseFloat(readTotal) - Math.round(itemPrice * .15) - itemPrice
     document.getElementById('total').innerText = total
+    if (total < 0 || taxTotal < 0) {
+        document.getElementById('taxTotal').innerText = 0;
+        document.getElementById('total').innerText = 0;
+    }
 }
 var crossIPhone = document.getElementById('removeBtnIPhone')
 crossIPhone.addEventListener('click', function() {
@@ -129,10 +137,15 @@ function crossButton(countItemId, itemPriceId, itemPrice) {
     // taxTotal
     var readTaxTotal = document.getElementById('taxTotal').innerText
     var taxTotal = parseFloat(readTaxTotal)
-    document.getElementById('taxTotal').innerText = taxTotal - Math.floor(Price * .15);
+    document.getElementById('taxTotal').innerText = taxTotal - Math.round(Price * .15);
 
     // mainTotal
     var readTotal = document.getElementById('total').innerText
-    var total = parseFloat(readTotal) - count * Math.floor(itemPrice * .15) - count * itemPrice
+    var total = parseFloat(readTotal) - count * Math.round(itemPrice * .15) - count * itemPrice
     document.getElementById('total').innerText = total
+
+    if (total < 0 || taxTotal < 0) {
+        document.getElementById('taxTotal').innerText = 0;
+        document.getElementById('total').innerText = 0;
+    }
 }
