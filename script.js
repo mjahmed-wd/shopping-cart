@@ -102,3 +102,37 @@ function removeItem(countItemId, itemPriceId, itemPrice) {
     var total = parseFloat(readTotal) - Math.floor(itemPrice * .15) - itemPrice
     document.getElementById('total').innerText = total
 }
+var crossIPhone = document.getElementById('removeBtnIPhone')
+crossIPhone.addEventListener('click', function() {
+    crossButton('countIPhone', 'iPhonePrice', 1219)
+})
+var crossCover = document.getElementById('removeBtnCover')
+crossCover.addEventListener('click', function() {
+    crossButton('countCover', 'coverPrice', 59)
+})
+
+function crossButton(countItemId, itemPriceId, itemPrice) {
+    // read count
+    var readCount = document.getElementById(countItemId)
+    var count = parseFloat(readCount.value)
+    readCount.value = count - count
+        // read amount
+    var readPrice = document.getElementById(itemPriceId)
+    var Price = parseFloat(readPrice.innerText)
+    Price = count * itemPrice
+    readPrice.innerText = Price - Price
+        // read subtotalPrice
+    var readSubTotal = document.getElementById('subTotal').innerText
+    var subTotal = parseFloat(readSubTotal)
+    document.getElementById('subTotal').innerText = subTotal - Price
+
+    // taxTotal
+    var readTaxTotal = document.getElementById('taxTotal').innerText
+    var taxTotal = parseFloat(readTaxTotal)
+    document.getElementById('taxTotal').innerText = taxTotal - Math.floor(Price * .15);
+
+    // mainTotal
+    var readTotal = document.getElementById('total').innerText
+    var total = parseFloat(readTotal) - count * Math.floor(itemPrice * .15) - count * itemPrice
+    document.getElementById('total').innerText = total
+}
