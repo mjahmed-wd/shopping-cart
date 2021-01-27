@@ -78,6 +78,9 @@ function removeItem(countItemId, itemPriceId, itemPrice) {
     var readCount = document.getElementById(countItemId)
     var count = parseFloat(readCount.value)
     count--
+    if (count < 0) {
+        return count = 0
+    }
     readCount.value = count
         // read amount
     var readPrice = document.getElementById(itemPriceId)
