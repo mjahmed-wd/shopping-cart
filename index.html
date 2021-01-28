@@ -25,12 +25,12 @@
 
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button id="iPhoneRemove" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <button onclick="calculation('iPhonePrice', 'countIPhone', 1219, '-')" id="iPhoneRemove" class="btn btn-default"><i class="fas fa-minus"></i></button>
                                     <input type="text" id="countIPhone" class="form-control text-center" value="1">
-                                    <button id="iPhoneAdd" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    <button onclick="calculation('iPhonePrice', 'countIPhone', 1219, '+')" id="iPhoneAdd" class="btn btn-default"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <h5>$<span id="iPhonePrice">1219</span></h5>
-                                <img src="images/remove.png" alt="" id="removeBtnIPhone" class="remove-item">
+                                <img onclick="calculation('iPhonePrice', 'countIPhone', 1219, 'x')" src="images/remove.png" alt="" id="removeBtnIPhone" class="remove-item">
                             </div>
                         </div>
                     </div>
@@ -43,13 +43,13 @@
                             </div>
                             <div class="col-md-5 center-item">
                                 <div class="input-group number-spinner">
-                                    <button id="coverRemove" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                                    <button onclick="calculation('coverPrice', 'countCover', 59, '-')" id="coverRemove" class="btn btn-default"><i class="fas fa-minus"></i></button>
                                     <input type="text" id="countCover" class="form-control text-center" value="1">
-                                    <button id="coverAdd" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                                    <button onclick="calculation('coverPrice', 'countCover', 59, '+')" id="coverAdd" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                                 </div>
                                 <h5>$<span id="coverPrice">59</span></h5>
-                                <img src="images/remove.png" alt="" id="removeBtnCover" class="remove-item">
+                                <img onclick="calculation('coverPrice', 'countCover', 59, 'x')" src="images/remove.png" alt="" id="removeBtnCover" class="remove-item">
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,34 @@
             </div>
         </div>
     </section>
-    <script src="script.js"></script>
+    <script>
+        function calculation(singleProductPriceTotalId, inputIdName, itemPrice, logic) {
+            if (logic == "+") {
+                document.getElementById(inputIdName).value = readValue(inputIdName) + 1
+            } else if (logic == "-") {
+                if (readValue(inputIdName) > 0) {
+                    document.getElementById(inputIdName).value = readValue(inputIdName) - 1
+                } else {
+                    document.getElementById(inputIdName).value = 0
+                }
+            } else if (logic == "x") {
+                document.getElementById(inputIdName).value = 0
+            }
+            document.getElementById(singleProductPriceTotalId).innerText = readValue(inputIdName) * itemPrice
+            var subTotal = document.getElementById('subTotal');
+            subTotal.innerText = readValue('countIPhone') * 1219 + readValue('countCover') * 59
+            var taxTotal = document.getElementById('taxTotal');
+            taxTotal.innerText = Math.round((readValue('countIPhone') * 1219 + readValue('countCover') * 59) * .2)
+            document.getElementById('total').innerText = parseInt(subTotal.innerText) + parseInt(taxTotal.innerText)
+        }
+
+        function readValue(inputIdName) {
+            return parseInt(document.getElementById(inputIdName).value)
+        }
+    </script>
+    <!-- <script src="script.js"></script>
+    <script src="second,js"></script> -->
+    <!-- <script src="one.js"></script> -->
 </body>
 
 </html>
